@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Transaction;
+use App\Repository\TransactionRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * @Route("/api/transaction")
+ */
 class TransController extends AbstractController
 {
 
@@ -23,7 +27,7 @@ class TransController extends AbstractController
         $this->encoder = $encoder;
     }
     /**
-     * @Route("/api/trans", name="trans")
+     * @Route("", name="trans")
      */
     public function index(Request $req): Response
     {
@@ -72,25 +76,49 @@ class TransController extends AbstractController
         $em->persist($transaction);
         $em->flush();
         if ($data['status'] == 3) {
-            $result = $this->consumeTransaction($transaction,3);
-            if ($result ==1 ) {
+            $result = $this->consumeTransaction($transaction, 3);
+            if ($result == 1) {
                 return new JsonResponse([
-                    'type'=>'sucess',
-                    'message'=>'transastion done id:'.$transaction->getId()
+                    'type' => 'sucess',
+                    'message' => 'transastion done id:' . $transaction->getId()
                 ]);
             }
         }
         return new JsonResponse([
-            'type'=>'sucess',
-            "message" => "transaction create. transaction id:".$transaction->getId()
+            'type' => 'sucess',
+            "message" => "transaction create. transaction id:" . $transaction->getId()
         ]);
 
         // return new JsonResponse( );
     }
 
-    public function consumeTransaction(Transaction $transaction,$code=2)
+    /**
+     * @Route("/consume", name="consume")
+     */
+    public function consume(Request $req,TransactionRepository $tr)
     {
-        if ( 1<= $transaction->getStatus() && $code ==3 ) {
+         //get request content
+         $json = $req->getContent();
+         //decode to json
+         $data = json_decode($json, true);
+        $trans = $tr->findOneBy(['id'=>$data['transaction']]);
+        //dd($trans);
+         if ($trans!=null && $this->consumeTransaction($trans,3) ) {
+            return new JsonResponse([
+                'type' => 'sucess',
+                'message' => 'transastion done id:' . $trans->getId()
+            ]);
+         }
+
+         return new JsonResponse([
+            'type' => 'error',
+            'message' => 'transaction error'
+        ]);
+    }
+
+    public function consumeTransaction(Transaction $transaction, $code = 2)
+    {
+        if ( (1 <= $transaction->getStatus() && 3 > $transaction->getStatus()) && $code == 3) {
             $sender = $transaction->getSender();
             $amount = $transaction->getAmount();
             $recever = $transaction->getRecever();
