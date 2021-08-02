@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\PreUpdate;
@@ -57,6 +59,16 @@ class User implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private $update_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="sender")
+     */
+    private $transactions;
+
+    public function __construct()
+    {
+        $this->transactions = new ArrayCollection();
+    }
     /**
      * @PrePersist
      */
@@ -189,6 +201,36 @@ class User implements UserInterface
     public function setUpdateAt(\DateTimeInterface $update_at): self
     {
         $this->update_at = $update_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Transaction[]
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    public function addTransaction(Transaction $transaction): self
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): self
+    {
+        if ($this->transactions->removeElement($transaction)) {
+            // set the owning side to null (unless already changed)
+            if ($transaction->getSender() === $this) {
+                $transaction->setSender(null);
+            }
+        }
 
         return $this;
     }
