@@ -28,8 +28,11 @@ elle renvoit une repose
 en cas d'echec
 #### /api/transaction/consume ####
 cette route est  utiliser pour initier une transaction la transaction les entete sont les suivante:
+<br>
 **json** 
+<br>
 et
+<br>
 **Authorization**:**Bearer token**
 le corp est:
 ```
