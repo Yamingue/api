@@ -14,7 +14,9 @@ la requette contien une entete json de ce genre.
 
 elle renvoit une repose 
 '''
-{"token: "token"}
+{
+    "token: "token"
+}
 ```
  en cas de succes  et 
 ```
