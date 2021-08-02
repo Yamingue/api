@@ -45,13 +45,17 @@ en cas de succes la reponce est de la suivande
 {
     "type": "sucess",
     "message": "transastion done id:4"
-    }
-    **ou**
-    {
+}
+```
+ou
+```
+{
     "type": "sucess",
     "message": "ransaction create. transaction id:4"
-    }
+}
+```
 en cas d'echec :
+```
 {
   "type": "error",
   "message": "message d'erreur"
