@@ -33,13 +33,13 @@ le corp est:
 }
 ```
 
-**recever** est l'id du beneficiaire
-**password** est le mots de pass de l'initiateur
-**status** est l'etat de la transaction, elle varie de 0-3,
-    0: pour transaction annuler,
-    1: pour transaction initier
-    2: pour transaction en cour
-    3: pour transaction terminer
+1. **recever** est l'id du beneficiaire
+2. **password** est le mots de pass de l'initiateur
+3. **status** est l'etat de la transaction, elle varie de 0-3,
+    1. 0: pour transaction annuler,
+    2. 1: pour transaction initier
+    3. 2: pour transaction en cour
+    4. 3: pour transaction terminer
 en cas de succes la reponce est de la suivande 
 ```
 {
