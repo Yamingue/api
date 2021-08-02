@@ -2,6 +2,31 @@
 
 les route disponible pour l'api sont les suivante:
 
+### /api/user/create ###
+**Methode POst**
+utiliser pour la creation des utilisateurs <br>
+entete Json:
+```
+{
+	"email": "yamking01@gmail.com",
+	"password": "12345678"
+}
+```
+reponse :
+```
+{
+  "type": "success",
+  "user": 3
+}
+```
+ou
+```
+{
+  "type": "error",
+  "message": "utilisateur existant"
+}
+```
+
 #### /api/login ####
 **Methode POST** 
 ```
@@ -58,6 +83,8 @@ et en cas de success la reponse est:
 }
 ```
 #### /api/transaction ####
+
+    **Methode POST***
 cette route est  utiliser pour initier une transaction la transaction les entete sont les suivante:
 **json** 
 et
