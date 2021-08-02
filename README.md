@@ -26,8 +26,32 @@ elle renvoit une repose
 }
 ```
 en cas d'echec
-
-#### /api/trans ####
+#### /api/transaction/consume ####
+cette route est  utiliser pour initier une transaction la transaction les entete sont les suivante:
+**json** 
+et
+**Authorization**:**Bearer token**
+le corp est:
+```
+{
+	"transaction":"id"
+}
+```
+en cas d'echec la reponse est:
+```
+{
+  "type": "error",
+  "message": "transaction error"
+}
+```
+et en cas de success la reponse est:
+```
+{
+  "type": "success",
+  "message": "transaction error"
+}
+```
+#### /api/transaction ####
 cette route est  utiliser pour initier une transaction la transaction les entete sont les suivante:
 **json** 
 et
