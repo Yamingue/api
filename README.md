@@ -23,6 +23,7 @@ cette route est  utiliser pour initier une transaction la transaction les entete
 et
 **Authorization**:**Bearer token**
 le corp est:
+```
 {
 	"recever": 1,
 	"password":"12345678",
@@ -30,6 +31,7 @@ le corp est:
 	"amount": 11
 	
 }
+```
 
 **recever** est l'id du beneficiaire
 **password** est le mots de pass de l'initiateur
@@ -39,7 +41,8 @@ le corp est:
     2: pour transaction en cour
     3: pour transaction terminer
 en cas de succes la reponce est de la suivande 
-    {
+```
+{
     "type": "sucess",
     "message": "transastion done id:4"
     }
@@ -53,3 +56,4 @@ en cas d'echec :
   "type": "error",
   "message": "message d'erreur"
 }
+```
