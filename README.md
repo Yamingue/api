@@ -3,13 +3,14 @@
 les route disponible pour l'api sont les suivante:
 
 #### /api/login ####
+**Methode POST** 
 ```
 {
 	"email": "yamking01@gmail.com",
 	"password": "12345678"
 }
 ```
-
+<br>
 la requette contien une entete json de ce genre.
 
 elle renvoit une repose 
@@ -27,6 +28,7 @@ elle renvoit une repose
 ```
 en cas d'echec
 #### /api/transaction/consume ####
+**Methode PUT** <br>
 cette route est  utiliser pour initier une transaction la transaction les entete sont les suivante:
 <br>
 **json** 
@@ -34,6 +36,7 @@ cette route est  utiliser pour initier une transaction la transaction les entete
 et
 <br>
 **Authorization**:**Bearer token**
+<br>
 le corp est:
 ```
 {
