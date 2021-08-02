@@ -3,18 +3,26 @@
 les route disponible pour l'api sont les suivante:
 
 #### /api/login ####
+```
 {
 	"email": "yamking01@gmail.com",
 	"password": "12345678"
 }
+```
 
 la requette contien une entete json de ce genre.
 
-elle renvoit une repose {"token: "token"} en cas de succes  et 
+elle renvoit une repose 
+'''
+{"token: "token"}
+```
+ en cas de succes  et 
+```
 {
   "code": 401,
   "message": "Invalid credentials."
 }
+```
 en cas d'echec
 
 #### /api/trans ####
